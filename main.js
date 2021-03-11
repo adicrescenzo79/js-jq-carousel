@@ -1,10 +1,12 @@
 $(document).ready(function() {
   dx();
   sx();
+  setIds();
+  nav();
 });
 
 
-function dx(){
+function dx() {
   var frecciaDx = $('.fa-angle-right');
 
 
@@ -56,4 +58,39 @@ function sx() {
 
 
 
+}
+
+var immagini = $('div.images img');
+var pallini = $('div.nav i')
+
+function setIds(){
+  for (var i = 0; i < immagini.length; i++) {
+    immagini[i].setAttribute('id', i+1);
+    pallini[i].setAttribute('id', i+1);
+  }
+}
+
+
+function nav() {
+
+  pallini.click(function(){
+    var id = this.getAttribute('id');
+    var immagineNew = $('.images img#' + id);
+    var immagineOld = $('img.active');
+
+    var pallinoNew = pallini[id - 1];
+    var pallinoOld = $('i.active');
+    pallinoOld.removeClass('active');
+    $(pallinoNew).addClass('active');
+
+
+    switch (immagineNew.hasClass()) {
+      case !'active':
+        immagineNew.addClass('active');
+        immagineOld.removeClass('active');
+        break;
+    }
+
+
+  });
 }
